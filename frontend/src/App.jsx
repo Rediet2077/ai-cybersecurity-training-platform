@@ -10,6 +10,7 @@ import Quiz from "./pages/Quiz/Quiz";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import AIChat from "./pages/AIChat/AIChat";
 import Profile from "./pages/profile/Profile";
+import Resources from "./pages/Resources/Resources";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/ai-chat" element={<AIChat />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/resources" element={<Resources />} />
       </Routes>
     </BrowserRouter>
   );

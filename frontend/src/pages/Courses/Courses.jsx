@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import CourseDetail from "../CourseDetail/CourseDetail";
 
 const allCourses = [
   {
@@ -130,6 +131,134 @@ const allCourses = [
     category: "CTF",
     level: "all",
   },
+  {
+    id: 9,
+    title: "Penetration Testing Pro",
+    desc: "Advanced penetration testing techniques for professional security assessors.",
+    instructor: "Dr. Sarah Chen",
+    lessons: 24,
+    rating: 4.9,
+    reviews: 180,
+    price: "$59.99",
+    priceColor: "text-blue-400",
+    badge: "Advanced",
+    badgeColor: "bg-orange-500",
+    gradient: "from-orange-900 via-red-900 to-slate-900",
+    category: "Web Security",
+    level: "advanced",
+  },
+  {
+    id: 10,
+    title: "Social Engineering",
+    desc: "Master human-based attack techniques and learn how to defend against manipulation.",
+    instructor: "Prof. James Wright",
+    lessons: 14,
+    rating: 4.7,
+    reviews: 95,
+    price: "$24.99",
+    priceColor: "text-blue-400",
+    badge: "Intermediate",
+    badgeColor: "bg-blue-600",
+    gradient: "from-pink-900 via-purple-900 to-slate-900",
+    category: "Network Security",
+    level: "intermediate",
+  },
+  {
+    id: 11,
+    title: "IoT Security",
+    desc: "Identify and exploit vulnerabilities in Internet of Things devices and firmware.",
+    instructor: "Nina Patel",
+    lessons: 16,
+    rating: 4.6,
+    reviews: 78,
+    price: "$34.99",
+    priceColor: "text-blue-400",
+    badge: "Intermediate",
+    badgeColor: "bg-blue-600",
+    gradient: "from-teal-900 via-cyan-900 to-slate-900",
+    category: "Network Security",
+    level: "intermediate",
+  },
+  {
+    id: 12,
+    title: "Incident Response",
+    desc: "Detect, contain and recover from security incidents using industry-standard methodologies.",
+    instructor: "Dr. Elena Volkov",
+    lessons: 18,
+    rating: 4.8,
+    reviews: 132,
+    price: "$44.99",
+    priceColor: "text-blue-400",
+    badge: "Advanced",
+    badgeColor: "bg-orange-500",
+    gradient: "from-red-900 via-rose-900 to-slate-900",
+    category: "Web Security",
+    level: "advanced",
+  },
+  {
+    id: 13,
+    title: "Digital Forensics",
+    desc: "Investigate cybercrime, recover deleted data and analyze digital evidence professionally.",
+    instructor: "Marcus Thompson",
+    lessons: 22,
+    rating: 4.7,
+    reviews: 115,
+    price: "$49.99",
+    priceColor: "text-blue-400",
+    badge: "Advanced",
+    badgeColor: "bg-orange-500",
+    gradient: "from-slate-800 via-gray-900 to-slate-900",
+    category: "Linux",
+    level: "advanced",
+  },
+  {
+    id: 14,
+    title: "Secure Coding Practices",
+    desc: "Write secure code from day one and avoid the most common programming vulnerabilities.",
+    instructor: "Alex Martinez",
+    lessons: 10,
+    rating: 4.5,
+    reviews: 200,
+    price: "Free",
+    priceColor: "text-green-400",
+    badge: "Beginner",
+    badgeColor: "bg-green-600",
+    gradient: "from-emerald-900 via-green-900 to-slate-900",
+    category: "Web Security",
+    level: "beginner",
+  },
+  {
+    id: 15,
+    title: "Bug Bounty Hunting",
+    desc: "Find real vulnerabilities, write reports and get paid through bug bounty programs.",
+    instructor: "CyberNinja Team",
+    lessons: 20,
+    rating: 4.9,
+    reviews: 290,
+    price: "$39.99",
+    priceColor: "text-blue-400",
+    badge: "Advanced",
+    badgeColor: "bg-orange-500",
+    gradient: "from-violet-900 via-purple-900 to-slate-900",
+    category: "Web Security",
+    level: "advanced",
+  },
+  {
+    id: 16,
+    title: "OSINT & Threat Intelligence",
+    desc: "Gather open-source intelligence and perform threat analysis on targets and adversaries.",
+    instructor: "Dr. Robert Kim",
+    lessons: 15,
+    rating: 4.8,
+    reviews: 145,
+    price: "$29.99",
+    priceColor: "text-blue-400",
+    badge: "Intermediate",
+    badgeColor: "bg-blue-600",
+    gradient: "from-indigo-900 via-blue-900 to-slate-900",
+    category: "Network Security",
+    level: "intermediate",
+  },
 ];
 
 const categories = ["All", "Network Security", "Web Security", "Cryptography", "Linux", "Malware", "CTF"];
@@ -155,6 +284,11 @@ function Courses() {
   const [activeLevel, setActiveLevel] = useState("All");
   const [activeCategory, setActiveCategory] = useState("All");
   const [enrolled, setEnrolled] = useState({});
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  if (selectedCourse) {
+    return <CourseDetail onBack={() => setSelectedCourse(null)} />;
+  }
 
   const filtered = allCourses.filter((c) => {
     const matchSearch = c.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -299,16 +433,26 @@ function Courses() {
 
                 <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
                   <span className={`text-base font-extrabold ${c.priceColor}`}>{c.price}</span>
-                  <button
-                    onClick={() => toggleEnroll(c.id)}
-                    className={`text-xs font-semibold px-4 py-2 rounded-lg transition-colors ${
-                      enrolled[c.id]
-                        ? "bg-green-600/20 text-green-400 border border-green-500/30"
-                        : "bg-blue-600 hover:bg-blue-700 text-white"
-                    }`}
-                  >
-                    {enrolled[c.id] ? "Enrolled ✓" : "Enroll Now"}
-                  </button>
+                  <div className="flex gap-2">
+                    {enrolled[c.id] && (
+                      <button
+                        onClick={() => setSelectedCourse(c)}
+                        className="text-xs font-semibold px-3 py-2 rounded-lg transition-colors bg-blue-600 hover:bg-blue-700 text-white"
+                      >
+                        View Course
+                      </button>
+                    )}
+                    <button
+                      onClick={() => toggleEnroll(c.id)}
+                      className={`text-xs font-semibold px-4 py-2 rounded-lg transition-colors ${
+                        enrolled[c.id]
+                          ? "bg-green-600/20 text-green-400 border border-green-500/30"
+                          : "bg-blue-600 hover:bg-blue-700 text-white"
+                      }`}
+                    >
+                      {enrolled[c.id] ? "Enrolled ✓" : "Enroll Now"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

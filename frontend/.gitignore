@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment — keep .env.example, ignore real secrets
+.env
+.env.local
+.env.*.local
+!.env.example

@@ -1,13 +1,14 @@
 {
-  "name": "frontend",
+  "name": "safecampus",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "AI-Powered Cybersecurity Training Platform",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "oxlint"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.2",
@@ -22,5 +23,8 @@
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.72.0",
     "vite": "^8.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

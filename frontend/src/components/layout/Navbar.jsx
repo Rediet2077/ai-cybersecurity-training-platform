@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Labs", to: "/labs" },
   { label: "AI Assistant", to: "/ai-chat" },
   { label: "Leaderboard", to: "/leaderboard" },
+  { label: "Resources", to: "/resources" },
   { label: "About Us", to: "/about" },
 ];
 
